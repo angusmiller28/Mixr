@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mixr", "Mixr\Mixr.csproj", "{0680C312-9B30-48E0-9463-E567757819B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mixr.Tests", "Mixr.Tests\Mixr.Tests.csproj", "{DECBAE38-2412-4051-B10B-F6C343E06158}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0680C312-9B30-48E0-9463-E567757819B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0680C312-9B30-48E0-9463-E567757819B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0680C312-9B30-48E0-9463-E567757819B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0680C312-9B30-48E0-9463-E567757819B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DECBAE38-2412-4051-B10B-F6C343E06158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DECBAE38-2412-4051-B10B-F6C343E06158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DECBAE38-2412-4051-B10B-F6C343E06158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DECBAE38-2412-4051-B10B-F6C343E06158}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {773ABD59-B992-4540-9E14-16FFFD4DEBC3}
+	EndGlobalSection
+EndGlobal
