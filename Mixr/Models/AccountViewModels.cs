@@ -1,8 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Mixr.Models
 {
+    public class UserViewModel
+    {
+        public IEnumerable<System.Web.Mvc.SelectListItem> RolesList { get; set; }
+        public string RolesListId { get; set; }
+    }
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -42,12 +49,20 @@ namespace Mixr.Models
     public class ForgotViewModel
     {
         [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]
@@ -64,10 +79,19 @@ namespace Mixr.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        
+       
+        public System.Web.Mvc.SelectList Role { get; set; }
+
+        public string SelectedRole { get; set; }
+
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -104,6 +128,10 @@ namespace Mixr.Models
 
     public class ForgotPasswordViewModel
     {
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

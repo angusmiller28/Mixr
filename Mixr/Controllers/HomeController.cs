@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Mixr.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -20,6 +21,7 @@ namespace Mixr.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

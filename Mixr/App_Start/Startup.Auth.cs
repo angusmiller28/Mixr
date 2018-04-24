@@ -6,11 +6,16 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Mixr.Models;
+using System.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Mixr
 {
     public partial class Startup
     {
+       
+
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -50,19 +55,18 @@ namespace Mixr
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: "Pzkv51vqCcmaSxqOjlgCub6ax",
+               consumerSecret: "yeTzUVPg56u3sgpTACW21b1sMHvwSkdCmn0N0Bq6FjKqB9Qmmz");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "372861206549843",
+               appSecret: "4a3f0fe93afe4a9f6491339c85611d81");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(
+                clientId: "702690696354-k6oq4e0plvbj5oh8f6i0l226ifbj2gnc.apps.googleusercontent.com",
+                clientSecret: "EvCOtAOhOuTHCkvWDR20POw1"
+            );
         }
     }
 }

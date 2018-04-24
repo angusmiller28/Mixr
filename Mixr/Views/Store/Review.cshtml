@@ -1,0 +1,84 @@
+﻿@model Mixr.Models.ReviewViewModel
+
+@{
+    ViewBag.Title = "Review";
+    var userName = System.Web.HttpContext.Current.User.Identity.Name;
+}
+
+<h1>Add Review</h1>
+<hr />
+<!-- write review region -->
+@using (Html.BeginForm("Review", "Store", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rating, new { @class = "control-label" })
+        <div class="">
+            @Html.ValidationMessageFor(m => m.Rating, "", new { @class = "text-danger" })
+            <div class="star-rating">
+                <div class="star-rating__wrap">
+                    @Html.RadioButtonFor(m => m.Rating, "5", new { @class = "star-rating__input", @id = "star-rating-5" })
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"></label>
+                    @Html.RadioButtonFor(m => m.Rating, "4", new { @class = "star-rating__input", @id = "star-rating-4" })
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+                    @Html.RadioButtonFor(m => m.Rating, "3", new { @class = "star-rating__input", @id = "star-rating-3" })
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+                    @Html.RadioButtonFor(m => m.Rating, "2", new { @class = "star-rating__input", @id = "star-rating-2" })
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+                    @Html.RadioButtonFor(m => m.Rating, "1", new { @class = "star-rating__input", @id = "star-rating-1" })
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if (Request.IsAuthenticated)
+    {
+        foreach (var user in Model.ReviewUserCollection)
+        {
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>@user.UserName</p>
+                    <img src="~/Uploads/Users/Avatar/@user.Avatar" alt="Alternate Text" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(m => m.CustomerName, new { Value = @user.Id })
+                </div>
+            </div>
+            }
+        }
+            else
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CustomerName, new { @class = "control-label" })
+                    <div class="">
+                        @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                        @Html.EditorFor(m => m.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            }
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Review, new { @class = "control-label" })
+            <div class="">
+                @Html.ValidationMessageFor(m => m.Review, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(m => m.Review, new { @class = "form-control col-12" } )
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <div class="">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </div>
+
+}
+
+
+
+

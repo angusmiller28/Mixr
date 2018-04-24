@@ -1,0 +1,128 @@
+﻿@model Mixr.Models.CheckoutViewModel
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h1>Checkout.</h1>
+@using (Html.BeginForm("Checkout", "Store", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+<div class="billing-container justify-center">
+    <hr />
+    <h4>Billing Information</h4>
+
+    @if (Request.IsAuthenticated)
+    {
+        foreach (var user in Model.UserCollection)
+        {
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>@user.UserName</p>
+                    <img src="~/Uploads/Users/Avatar/@user.Avatar" alt="Alternate Text" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(m => m.CustomerName, new { Value = @user.Id })
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.CustomerName, new { @class = "control-label" })
+            <div class="">
+                @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                @Html.EditorFor(m => m.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.BillingAddress, new { @class = "control-label" })
+        <div class="">
+            @Html.ValidationMessageFor(m => m.BillingAddress, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.BillingAddress, new { htmlAttributes = new { @class = "form-control", placeholder = ""} })
+        </div>
+        <div id="map-canvas"></div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ZipCode, new { @class = "control-label" })
+        <div class="">
+            @Html.ValidationMessageFor(m => m.ZipCode, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+        <div class="">
+            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+</div>
+
+    <div class="payment-container center-content">
+        <h4>Payment Method</h4>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CardNumber, new { @class = "control-label" })
+            <div class="">
+                @Html.ValidationMessageFor(m => m.CardNumber, "", new { @class = "text-danger" })
+                @Html.EditorFor(m => m.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ExpirationDateMonth, new { @class = "control-label" })
+            <div class="">
+                @Html.ValidationMessageFor(m => m.ExpirationDateMonth, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(m => m.ExpirationDateMonth, Model.GetDropDownListForMonths(), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ExpirationDateYear, new { @class = "control-label" })
+            <div class="">
+                @Html.ValidationMessageFor(m => m.ExpirationDateYear, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(m => m.ExpirationDateYear, Model.GetDropDownListForYears(), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CardCVV, new { @class = "control-label" })
+            <div class="">
+                @Html.ValidationMessageFor(m => m.CardCVV, "", new { @class = "text-danger" })
+                @Html.EditorFor(m => m.CardCVV, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="">
+                <input type="submit" value="Review" class="btn btn-primary" />
+            </div>
+        </div>
+        </div>
+        }
+
+        <div id="map-canvas"></div>
+
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIBf_dlxPuiUcIltqhzpt-NUHvHUZs8Ig&libraries=places"></script>
+
+
+        <script type="text/javascript">
+            google.maps.event.addDomListener(window, 'load', function () {
+                var input = document.getElementById('BillingAddress');
+                var options = {
+                    types: ['address'],
+                    componentRestrictions: { country: 'au' }
+                };
+                autocomplete = new google.maps.places.Autocomplete(input, options);
+
+            });
+
+        </script>

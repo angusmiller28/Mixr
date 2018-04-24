@@ -1,0 +1,60 @@
+﻿@model Mixr.Models.Cart
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h1>Cart</h1>
+<hr />
+
+@if (Model != null)
+{
+    foreach (var product in Model.CartCollection)
+    {
+        <img class="card-img-top" src="~/Uploads/Products/@product.Image" alt="Card image cap" style="width: 300px; height: 200px">
+        <p>@product.Name</p>
+        <p>$@product.Price</p>
+
+        <!-- update product quantity -->
+        using (Html.BeginForm("CartProductUpdateQuantity", "Store", new { ReturnUrl = ViewBag.ReturnUrl, id = product.Id }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.LabelFor(m => m.Quantity, new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "col-md-2 text-danger" })
+            <div class="form-group">
+                <div class="btn-group">
+                    @Html.TextBoxFor(m => m.Quantity, @product.Quantity.ToString(), new { @class = "form-control mr-2", @type = "number", @min = "1", @value = "1" })
+                    <input type="submit" value="Update" class="btn btn-default" />
+                </div>
+            </div>
+        }
+        <!-- end of update product quantity -->
+        <!-- remove product -->
+        using (Html.BeginForm("CartProductRemove", "Store", new { ReturnUrl = ViewBag.ReturnUrl, id = product.Id }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Remove from Cart" class="btn btn-danger" />
+                </div>
+            </div>
+        }
+        <!-- end of remove product -->
+    }
+
+
+    <!-- go to checkout -->
+    <div class="form-group text-center">
+        <div class="">
+            <a href="/Store/Checkout" class="btn btn-primary">Checkout</a>
+        </div>
+    </div>
+    <!-- end of go to checkout -->
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
+
