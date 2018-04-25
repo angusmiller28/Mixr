@@ -33,6 +33,8 @@ namespace Mixr.Controllers
             {
                 ProductsCollection = productViewModel.GetProduct(id),
                 ProductGalleryCollection = productViewModel.GetProductGalleryCollection(id),
+                ProductSpecificationCollection = productViewModel.GetProductSpecificationCollection(id),
+                ProductFeatureCollection = productViewModel.GetProductFeatureCollection(id),
                 ProductReviewsCollection = productViewModel.GetProductReviewCollection(id),
                 ProductReviewAverage = review.GetRatingAverage(id),
                 ProductReviewCount = review.GetRatingCount(id),

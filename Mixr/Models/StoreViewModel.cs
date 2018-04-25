@@ -45,6 +45,10 @@ namespace Mixr.Models
         public string Image { get; set; }
         public string Number { get; set; }
 
+        // shipping
+        [Display (Name = "Enter your postcode")]
+        public string ShippingPostcode { get; set; }
+
         // Cart 
         [Required]
         public int Quantity { get; set; }
@@ -54,6 +58,8 @@ namespace Mixr.Models
         public double ProductReviewAverage { get; set; }
         public int ProductReviewCount { get; set; }
         public IEnumerable<ProductGallery> ProductGalleryCollection { get; set; }
+        public IEnumerable<ProductSpecification> ProductSpecificationCollection { get; set; }
+        public IEnumerable<ProductFeature> ProductFeatureCollection { get; set; }
         public IEnumerable<Product> ProductsCollection { get; set; }
         public IEnumerable<ReviewModel> ProductReviewsCollection { get; set; }
 
@@ -79,6 +85,28 @@ namespace Mixr.Models
             IEnumerable<ProductGallery> productGallery = query.ToList();
 
             return productGallery;
+        }
+        public IEnumerable<ProductSpecification> GetProductSpecificationCollection(int id)
+        {
+            Entities dbContext = new Entities();
+            var query = from ProductSpecification in dbContext.ProductSpecifications
+                        where ProductSpecification.Product_Id == id
+                        select ProductSpecification;
+
+            IEnumerable<ProductSpecification> productSpecification = query.ToList();
+
+            return productSpecification;
+        }
+        public IEnumerable<ProductFeature> GetProductFeatureCollection(int id)
+        {
+            Entities dbContext = new Entities();
+            var query = from ProductFeature in dbContext.ProductFeatures
+                        where ProductFeature.Product_Id == id
+                        select ProductFeature;
+
+            IEnumerable<ProductFeature> productSpecification = query.ToList();
+
+            return productSpecification;
         }
         public IEnumerable<ReviewModel> GetProductReviewUserCollection(int id)
         {

@@ -30,9 +30,11 @@ namespace Mixr.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<ProductFeature> ProductFeatures { get; set; }
         public virtual DbSet<ProductGallery> ProductGalleries { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductsGallery> ProductsGalleries { get; set; }
+        public virtual DbSet<ProductSpecification> ProductSpecifications { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
     }
 }

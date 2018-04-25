@@ -593,11 +593,17 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>MixrDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductFeature.cs">
+      <DependentUpon>MixrDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProductGallery.cs">
       <DependentUpon>MixrDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductsGallery.cs">
+      <DependentUpon>MixrDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductSpecification.cs">
       <DependentUpon>MixrDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Review.cs">
