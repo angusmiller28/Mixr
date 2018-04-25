@@ -63,7 +63,7 @@ namespace Mixr.Models
                 .Average(r => r.Rating);
             }
 
-            return ratingAverage;
+            return Math.Round(ratingAverage, 2);
         } 
     }
 }

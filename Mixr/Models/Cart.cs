@@ -10,11 +10,11 @@
     {
         public partial class Cart
         {
-            public string Id { get; set; }
-            public string Name { get; set; }
-            public decimal Price { get; set; }
-            public string Image { get; set; }
+            public decimal TotalPrice { get; set; }
             public int Quantity { get; set; }
+
+            [Display(Name = "Discount code")]
+            public string DiscountCode { get; set; }
             public List<ProductDTO> CartCollection = new List<ProductDTO>();
         
 
@@ -27,7 +27,7 @@
             {
                 CartCollection.RemoveAll(r => r.Id == id);
 
-        }
+            }
 
             public void UpdateProductQuantityFromCart(int id, int quantity)
             {
@@ -61,6 +61,22 @@
             {
                 return CartCollection.Exists(f => f.Id == id);
             }
+
+            public decimal GetTotalPrice()
+            {
+                Entities dbContext = new Entities();
+
+                decimal result = CartCollection.Sum(x => x.Price * x.Quantity);
+                return result;
+            }
+
+            public void UpdateTotalPrice()
+            {
+                Entities dbContext = new Entities();
+
+                TotalPrice = CartCollection.Sum(x => x.Price * x.Quantity);
+
+        }
 
     }
 

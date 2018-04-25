@@ -1,6 +1,7 @@
 ﻿using Mixr.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -155,12 +156,10 @@ namespace Mixr.Controllers
         // GET: Store/Cart
         public ActionResult Cart()
         {
-
-
             Cart cart = Session["cart"] as Cart;
 
-
             ViewBag.NotificationSuccess = TempData["notificationSuccess"];
+
             return View(cart);
         }
 
@@ -234,6 +233,13 @@ namespace Mixr.Controllers
 
         }
 
+        // POST: Store/Checkout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddDiscountCode()
+        {
+            return RedirectToAction("Cart");
+        }
 
         public static List<SelectListItem> GetDropDownListForYears()
         {
@@ -246,6 +252,7 @@ namespace Mixr.Controllers
 
             return ls;
         }
+
     }
 }
 

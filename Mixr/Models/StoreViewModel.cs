@@ -187,6 +187,7 @@ namespace Mixr.Models
     {
         public string Name { get; set; }
         public string Price { get; set; }
+        public decimal TotalPrice { get; set; }
         public string Image { get; set; }
         public string Quantity { get; set; }
     }
