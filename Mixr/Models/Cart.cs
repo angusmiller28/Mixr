@@ -16,9 +16,10 @@
             [Display(Name = "Discount code")]
             public string DiscountCode { get; set; }
             public List<ProductDTO> CartCollection = new List<ProductDTO>();
-        
+            
 
-            public void AddProductToCart(ProductDTO product)
+
+        public void AddProductToCart(ProductDTO product)
             {
                 CartCollection.Add(product);
             }

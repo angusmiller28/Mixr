@@ -53,22 +53,25 @@
     </div>
 
     <div class="col-6 mt-5">
+        @if (Model != null)
+        {
         <p><strong>Total Price: </strong>$@Model.GetTotalPrice()</p>
+        }
 
         <!-- update product quantity -->
         @using (Html.BeginForm("AddDiscountCode", "Store", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
-        {
+    {
         @Html.AntiForgeryToken()
 
         @Html.LabelFor(m => m.DiscountCode, new { @class = "control-label" })
         @Html.ValidationMessageFor(m => m.DiscountCode, "", new { @class = "col-md-2 text-danger" })
         <div class="form-group">
             <div class="btn-group">
-                @Html.TextBoxFor(m => m.DiscountCode, "", new { @class = "form-control mr-2 text-center"})
+                @Html.TextBoxFor(m => m.DiscountCode, "", new { @class = "form-control mr-2 text-center" })
                 <input type="submit" value="Discount" class="btn btn-default" />
             </div>
         </div>
-        }
+}
         <!-- end of update product quantity -->
 
         <!-- go to checkout -->

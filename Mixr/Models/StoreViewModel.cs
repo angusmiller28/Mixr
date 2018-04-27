@@ -236,6 +236,7 @@ namespace Mixr.Models
         public string Username { get; set; }
         public string Avatar { get; set; }
         public IEnumerable<AspNetUser> UserCollection { get; set; }
+       
 
         public List<SelectListItem> GetDropDownListForYears()
         {

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Mixr.Models.ProductDTO>
+
+<div class="row">
+    <div class="col-12">
+        <table id="SearchTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody id="DataSearching"></tbody>
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        var SetData = $("#DataSearching");
+        var SearchTable = $("#SearchTable");
+        SearchTable.hide()
+        $("#Search").keyup(function () {
+            var SearchBy = $("#SearchBy").val();
+            var SearchValue = $("#Search").val();
+
+            if (!SearchValue) {
+                SearchTable.hide()
+            } else {
+                SetData.html("");
+                $.ajax({
+                    type: "post",
+                    url: "/Search/GetSearchingData?SearchBy=" + SearchBy + "&SearchValue=" + SearchValue,
+                    contentType: "html",
+                    success: function (result) {
+                        SearchTable.show();
+                        if (result.length == 0) {
+                            SetData.append('<tr><td colspan="3">No Matching Data</td></tr>');
+                        }
+                        else {
+                            $.each(result, function (index, value) {
+                                var Data = "<tr>" +
+                                    "<td>" + value.Name + "</td>" +
+                                    "</tr>";
+                                SetData.append(Data);
+                            });
+                        }
+                    }
+                });
+            }
+                
+            
+        });
+    });
+</script>
+
+

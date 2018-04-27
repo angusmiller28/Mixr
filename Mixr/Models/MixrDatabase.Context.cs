@@ -36,5 +36,7 @@ namespace Mixr.Models
         public virtual DbSet<ProductsGallery> ProductsGalleries { get; set; }
         public virtual DbSet<ProductSpecification> ProductSpecifications { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<StudentInfo> StudentInfoes { get; set; }
+        public virtual DbSet<Table> Tables { get; set; }
     }
 }

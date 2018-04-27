@@ -45,6 +45,21 @@ namespace Mixr.Models
         {
         }
 
+        public IEnumerable<ProductDTO> GetProducts()
+        {
+            Entities dbContext = new Entities();
+            // select all review from the customers on a product page who are registered
+            return (from p in dbContext.Products
+                    select new ProductDTO
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Price = p.Price,
+                        Image = p.Image,
+
+                    }).ToList();
+        }
+
         public IEnumerable<ProductDTO> GetProduct(int id)
         {
             Entities dbContext = new Entities();
@@ -61,5 +76,20 @@ namespace Mixr.Models
                     }).ToList();
         }
 
+        public IEnumerable<ProductDTO> GetProductByName(string value)
+        {
+            Entities dbContext = new Entities();
+            // select all review from the customers on a product page who are registered
+            return (from p in dbContext.Products
+                    where p.Name.Contains(value)
+                    select new ProductDTO
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Price = p.Price,
+                        Image = p.Image,
+
+                    }).ToList();
+        }
     }
 }

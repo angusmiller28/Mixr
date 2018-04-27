@@ -168,16 +168,16 @@
     <div class="mt-5 mb-5 col-sm-12 col-md-6 col-lg-7">
         </div>
     <div class="mt-5 mb-5 col-sm-12 col-md-6 col-lg-5">
-        <ul class="nav nav-tabs details-tabs mb-5">
+        <ul class="nav nav-tabs details-tabs mb-5" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active">Shipping Cost</a>
+                <a class="nav-link active" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="true">Shipping Cost</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link">Check Store Stock</a>
+                <a class="nav-link" id="stock-tab" data-toggle="tab" href="#stock" role="tab" aria-controls="stock" aria-selected="true">Check Store Stock</a>
             </li>
         </ul>
 
-        <div class="fulfilment-container">
+        <div class="fulfilment-container tab-content">
             <div class="fulfilment-form-container mb-5">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
                 {
@@ -196,13 +196,13 @@
                         </div>
                 }
             </div>
-                <div class="shipping-container">
+                <div class="shipping-container tab-pane fade show active" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
                     <p>Delivery estimate Dalby 4405, QLD <a href="#">(change)</a></p>
                     <hr />
                     <p><strong>Cost:</strong> $14.95</p>
                     <p>In stock: Typically dispatched in 2-4 business days or choose Click & Collect if available and pickup in store</p>
                 </div>
-                <div class="stock-container">
+                <div class="stock-container tab-pane fade" id="stock" role="tabpanel" aria-labelledby="stock-tab">
                     <table>
                         <tbody>
                             <tr>
@@ -259,20 +259,20 @@
 
     <!-- end of product shipping region -->
     <!-- product details tab region -->
-    <ul class="nav nav-tabs details-tabs mt-5 mb-5">
+    <ul class="nav nav-tabs details-tabs mt-5 mb-5 role="tablist"">
         <li class="nav-item">
-            <a class="nav-link active" href="#">Overview</a>
+            <a class="nav-link active" href="#overview" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Overview</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Specification</a>
+            <a class="nav-link" href="#specification" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Specification</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Delivery and Returns Information</a>
+            <a class="nav-link" href="#delivery" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Delivery and Returns Information</a>
         </li>
     </ul>
 
-    <div class="details-container">
-        <div class="details-overview-container">
+    <div id="myTabContent" class="details-container tab-content">
+        <div id="overview" class="details-overview-container tab-pane show active" role="tabpanel" aria-labelledby="overview-tab">
             <h5 class="mt-5">Features</h5>
             @foreach (var productFeature in Model.ProductFeatureCollection)
             {
@@ -286,7 +286,7 @@
                 </div>
             }
         </div>
-        <div class="details-specification-container">
+        <div id="specification" class="details-specification-container tab-pane fade" role="tabpanel" aria-labelledby="specification">
             @foreach (var productSpecification in Model.ProductSpecificationCollection)
             {
             <table>
@@ -298,7 +298,7 @@
             <hr />
             }
         </div>
-        <div class="details-delivery-and-returns-info-container">
+        <div id="delivery" class="details-delivery-and-returns-info-container tab-pane fade" role="tabpanel" aria-labelledby="delivery-tab"> 
             <h5 class="mt-5">Home Delivery</h5>
             <p>For most items we charge a flat delivery fee per order as listed below:</p>
             <table>

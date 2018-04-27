@@ -197,7 +197,7 @@ namespace Mixr.Controllers
             Cart cart = Session["cart"] as Cart;
 
             UserModel user = new UserModel();
-
+            ProductDTO product = new ProductDTO();
 
             // build product view model
             var Checkout = new CheckoutViewModel()
