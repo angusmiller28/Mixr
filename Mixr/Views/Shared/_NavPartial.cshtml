@@ -1,11 +1,11 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-primary bg-theme-primary">
-    <a class="navbar-brand p-2" href="#">Mixr</a>
+    <a class="navbar-brand p-2 mr-5" href="#">Mixr</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto ml-auto p-2 d-flex justify-content-center">
+    <div class="collapse navbar-collapse d-flex flex-column flex-lg-row" id="navbarSupportedContent">
+        <ul class="navbar-nav" >
 
             <li class="nav-item">
                 @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link text-center" })
@@ -36,20 +36,18 @@
 
 
         </ul>
-        <form class="form-inline my-2 my-lg-0 d-flex justify-content-sm-center flex-row ml-lg-5 pt-sm-5 pb-sm-5 pt-lg-0 pb-lg-0">
-            <div>
-                <p>Search By: </p>
-                <select id="SearchBy">
+        <form class="form-inline my-2 my-lg-0 d-flex justify-content-sm-center flex-sm-row mr-5 mt-5 mt-lg-0">
+            <div class="form-group">
+                <select id="SearchBy" class="form-control mr-2">
                     <option value="Name">Name</option>
                     <option value="ID">ID</option>
                 </select>
                 
                 <input id="Search" class="form-control mr-2 text-center" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search mr-2"></i>Search</button>
+                <button class="btn btn-success my-2 my-sm-0 text-center" type="submit"><i class="fa fa-search"></i></button>
             </div>
         </form>
     </div>
-
 </nav>
 
 <div class="search-results-container">

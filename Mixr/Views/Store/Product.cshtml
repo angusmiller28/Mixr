@@ -49,55 +49,55 @@
 <!-- rating region -->
 <div class="review-stats-container">
     <div class="star-rating__wrap">
-            @if (@Model.ProductReviewAverage <= 0)
-            {
+        @if (@Model.ProductReviewAverage <= 0)
+        {
             <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
             <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
             <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
             <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
             <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-            }
-            else if (@Model.ProductReviewAverage < 2)
-            {
+        }
+        else if (@Model.ProductReviewAverage < 2)
+        {
             <label class="fa fa-star fa-lg" for="star-rating-5"></label>
             <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
             <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
             <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
             <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-            }
-            else if (@Model.ProductReviewAverage < 3)
-            {
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-            }
-            else if (@Model.ProductReviewAverage < 4)
-            {
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-            }
-            else if (@Model.ProductReviewAverage < 5)
-            {
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-            }
-            else
-            {
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-            }
-        
+        }
+        else if (@Model.ProductReviewAverage < 3)
+        {
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+        }
+        else if (@Model.ProductReviewAverage < 4)
+        {
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+        }
+        else if (@Model.ProductReviewAverage < 5)
+        {
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+        }
+        else
+        {
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+        }
+
 
     </div>
 
@@ -127,38 +127,38 @@
     <div class="product-card-container col-sm-12 col-md-6 col-lg-5 mt-5 d-flex justify-content-center">
         @foreach (var product in Model.ProductsCollection)
         {
-        <div class="card text-center m-2" style="min-width: 10rem; max-width: 20rem">
-            <div class="card-body">
-                <h5 class="card-title">@product.Name</h5>
-                <h6 class="card-text price-text mt-4 mb-4">$@product.Price</h6>
+            <div class="card text-center m-2" style="min-width: 10rem; max-width: 20rem">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <h4 class="card-text price-text mt-4 mb-4">$@product.Price</h4>
 
-                <div class="form-group d-flex justify-content-between">
-                    <p class="control-label">Availability</p>
-                    <p class="control-label">@product.Price</p>
+                    <div class="form-group d-flex justify-content-between">
+                        <p class="control-label">Availability</p>
+                        <p class="control-label">In Stock</p>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+                        <p class="control-label">Delivery</p>
+                        <p class="control-label"><a href="#">Calculate</a></p>
+                    </div>
+
+
+                    @using (Html.BeginForm("AddToCart", "Store", new { ReturnUrl = ViewBag.ReturnUrl, id = product.Id }, FormMethod.Post, new { @class = "justify-content-center form-inline", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group justify-content-between">
+                            @Html.LabelFor(m => m.Quantity, new { @class = "control-label mr-2" })
+                            @Html.TextBoxFor(m => m.Quantity, "1", new { @class = "col-6  text-center form-control", @type = "number", @min = "1", @value = "1" })
+                        </div>
+                        <div class="form-group mt-5">
+                            <div class="text-center">
+                                <input type="submit" value="Add To Cart" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    }
                 </div>
-
-                <div class="form-group d-flex justify-content-between">
-                    <p class="control-label">Delivery</p>
-                    <p class="control-label"><a href="#">Calculate</a></p>
-                </div>
-
-
-                @using (Html.BeginForm("AddToCart", "Store", new { ReturnUrl = ViewBag.ReturnUrl, id = product.Id }, FormMethod.Post, new { @class = "justify-content-center form-inline", role = "form" }))
-    {
-            @Html.AntiForgeryToken()
-
-            <div class="form-group justify-content-between">
-                @Html.LabelFor(m => m.Quantity, new { @class = "control-label mr-2" })
-                @Html.TextBoxFor(m => m.Quantity, "1", new { @class = "col-6  text-center form-control", @type = "number", @min = "1", @value = "1" })
             </div>
-            <div class="form-group mt-5">
-                <div class="text-center">
-                    <input type="submit" value="Add To Cart" class="btn btn-primary" />
-                </div>
-            </div>
-}
-            </div>
-        </div>
         } <!-- end of product cart card -->
     </div>
 </div>
@@ -166,7 +166,7 @@
 <div class="row">
     <!-- product shipping region -->
     <div class="mt-5 mb-5 col-sm-12 col-md-6 col-lg-7">
-        </div>
+    </div>
     <div class="mt-5 mb-5 col-sm-12 col-md-6 col-lg-5">
         <ul class="nav nav-tabs details-tabs mb-5" role="tablist">
             <li class="nav-item">
@@ -179,116 +179,112 @@
 
         <div class="fulfilment-container tab-content">
             <div class="fulfilment-form-container mb-5">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
-                {
-                        @Html.AntiForgeryToken()
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.ShippingPostcode, new { @class = "control-label" })
-                            <div class="">
-                                @Html.ValidationMessageFor(m => m.ShippingPostcode, "", new { @class = "text-danger" })
-                                @Html.TextBoxFor(m => m.ShippingPostcode, new { @class = "col-12 form-control" })
-                            </div>
+               
+                   
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ShippingPostcode, new { @class = "control-label" })
+                        <div class="">
+                            @Html.ValidationMessageFor(m => m.ShippingPostcode, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(m => m.ShippingPostcode, new { @class = "col-12 form-control" })
                         </div>
-                        <div class="form-group">
-                            <div class="text-center">
-                                <input type="submit" value="Check" class="btn btn-primary" />
-                            </div>
-                        </div>
-                }
+                    </div>
+                
             </div>
-                <div class="shipping-container tab-pane fade show active" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
-                    <p>Delivery estimate Dalby 4405, QLD <a href="#">(change)</a></p>
-                    <hr />
-                    <p><strong>Cost:</strong> $14.95</p>
-                    <p>In stock: Typically dispatched in 2-4 business days or choose Click & Collect if available and pickup in store</p>
-                </div>
-                <div class="stock-container tab-pane fade" id="stock" role="tabpanel" aria-labelledby="stock-tab">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td colspan="5" class="p-3">Dalby</td>
-                                <td class="p-3">Out of stock</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="p-3"></td>
-                                <td class="p-3"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="shipping-container tab-pane fade show active" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+                <p id="delivery-estimate-location"></p>
+                <hr />
+                <p><strong>Cost:</strong><span id="shipping-cost">-</span></p>
+                <p><strong>Estimated delivery time:</strong><span id="shipping-estimate-time">-</span></p>
+                
+            </div>
+            <div class="stock-container tab-pane fade" id="stock" role="tabpanel" aria-labelledby="stock-tab">
+                <p>In stock: Typically dispatched in 2-4 business days or choose Click & Collect if available and pickup in store</p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td id="stock-location" colspan="5" class="p-3">Dalby</td>
+                            <td class="p-3">Out of stock</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="p-3"></td>
+                            <td class="p-3"></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td colspan="5" class="p-3"><strong>Store opening hours</strong></td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="p-3">Today (ANZAC Day)</td>
-                                <td class="p-3">Closed</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="p-3">Tomorrow</td>
-                                <td class="p-3">09:00 am - 07:00 pm</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="p-3">Friday</td>
-                                <td class="p-3">09:00 am - 04:00 pm</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="p-3">Saturday</td>
-                                <td class="p-3">09:00 am - 04:00 pm</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="p-3">Sunday</td>
-                                <td class="p-3">09:00 am - 04:00 pm</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="p-3">Monday</td>
-                                <td class="p-3">09:00 am - 04:00 pm</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="p-3">Tuesday</td>
-                                <td class="p-3">09:00 am - 04:00 pm</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="p-3"><strong>Store opening hours</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="p-3">Today (ANZAC Day)</td>
+                            <td class="p-3">Closed</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="p-3">Tomorrow</td>
+                            <td class="p-3">09:00 am - 07:00 pm</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="p-3">Friday</td>
+                            <td class="p-3">09:00 am - 04:00 pm</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="p-3">Saturday</td>
+                            <td class="p-3">09:00 am - 04:00 pm</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="p-3">Sunday</td>
+                            <td class="p-3">09:00 am - 04:00 pm</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="p-3">Monday</td>
+                            <td class="p-3">09:00 am - 04:00 pm</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="p-3">Tuesday</td>
+                            <td class="p-3">09:00 am - 04:00 pm</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </div>
 
-    <!-- end of product shipping region -->
-    <!-- product details tab region -->
-    <ul class="nav nav-tabs details-tabs mt-5 mb-5 role="tablist"">
-        <li class="nav-item">
-            <a class="nav-link active" href="#overview" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Overview</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#specification" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Specification</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#delivery" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Delivery and Returns Information</a>
-        </li>
-    </ul>
+</div>
 
-    <div id="myTabContent" class="details-container tab-content">
-        <div id="overview" class="details-overview-container tab-pane show active" role="tabpanel" aria-labelledby="overview-tab">
-            <h5 class="mt-5">Features</h5>
-            @foreach (var productFeature in Model.ProductFeatureCollection)
-            {
-                <div class="row mb-5">
-                    <div class="col-12">
-                        <strong>@productFeature.Name</strong>
-                    </div>
-                    <div class="col-12">
-                        @productFeature.Description
-                    </div>
+<!-- end of product shipping region -->
+<!-- product details tab region -->
+<ul class="nav nav-tabs details-tabs mt-5 mb-5 role=" tablist"">
+    <li class="nav-item">
+        <a class="nav-link active" href="#overview" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Overview</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#specification" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Specification</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#delivery" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Delivery and Returns Information</a>
+    </li>
+</ul>
+
+<div id="myTabContent" class="details-container tab-content">
+    <div id="overview" class="details-overview-container tab-pane show active" role="tabpanel" aria-labelledby="overview-tab">
+        <h5 class="mt-5">Features</h5>
+        @foreach (var productFeature in Model.ProductFeatureCollection)
+        {
+            <div class="row mb-5">
+                <div class="col-12">
+                    <strong>@productFeature.Name</strong>
                 </div>
-            }
-        </div>
-        <div id="specification" class="details-specification-container tab-pane fade" role="tabpanel" aria-labelledby="specification">
-            @foreach (var productSpecification in Model.ProductSpecificationCollection)
-            {
+                <div class="col-12">
+                    @productFeature.Description
+                </div>
+            </div>
+        }
+    </div>
+    <div id="specification" class="details-specification-container tab-pane fade" role="tabpanel" aria-labelledby="specification">
+        @foreach (var productSpecification in Model.ProductSpecificationCollection)
+        {
             <table>
                 <tr>
                     <td colspan="5" width="200px"><strong>@productSpecification.Name</strong></td>
@@ -296,89 +292,89 @@
                 </tr>
             </table>
             <hr />
-            }
-        </div>
-        <div id="delivery" class="details-delivery-and-returns-info-container tab-pane fade" role="tabpanel" aria-labelledby="delivery-tab"> 
-            <h5 class="mt-5">Home Delivery</h5>
-            <p>For most items we charge a flat delivery fee per order as listed below:</p>
-            <table>
-                <thead style="background-color: blue; color: white">
-                    <tr>
-                        <th colspan="5" width="200px" class="p-3">Location</th>
-                        <th class="p-3">Cost Per Order*</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="5" class="p-3">Metro Areas</td>
-                        <td class="p-3">$9.90</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" class="p-3">Regional Areas</td>
-                        <td class="p-3">$13.90</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" class="p-3">Remote Areas</td>
-                        <td class="p-3">$15.90</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <p class="mt-5">For bulky orders or orders containing large or fragile items we charge a delivery fee based on the delivery destination and your items. The cost of delivery will be displayed in your shopping cart once a delivery address has been entered.</p>
-
-            <h5 class="mt-5">Delivery Time Frames*</h5>
-            <p>The below standard delivery time frames apply to all online orders:</p>
-            <table>
-                <thead style="background-color: blue; color: white">
-                    <tr>
-                        <th colspan="5" width="200px"  class="p-3">Location</th>
-                        <th class="p-3">Delivery Time Frames*</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="5"  class="p-3">Metro Areas</td>
-                        <td  class="p-3">4 - 6 business days</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"  class="p-3">Regional Areas</td>
-                        <td  class="p-3">6 - 8 business days</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"  class="p-3">Remote Areas</td>
-                        <td  class="p-3">8 - 9 business days</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <p class="mt-5">After your order has been shipped you will receive an email informing you of your parcel’s consignment number and the carrier it is shipping with. Please note that these are estimates only. If your order is more than 10 days late please email us at <a href="#">angus.miller28@gmail.com</a>.</p>
-            
-            <h5 class="mt-5">*Pre-orders</h5>
-            <p>Pre-ordered items are delivered in accordance with the advertised delivery time frames.</p>
-
-            <h5 class="mt-5">Authority to leave</h5>
-            <p>At the checkout you may grant the carrier authority to leave some goods at the delivery address even if unattended. However, please note that neither BIG W nor the carrier will be liable for loss or theft of the goods and the goods will be left at your risk. In addition, the carrier retains the discretion not to leave the goods unattended, including where the carrier deems it to be unsafe to do so.</p>
-
-            <h5 class="mt-5">Re-delivery Fees</h5>
-            <p>Please note that should the order be unable to be delivered to or left at the delivery address, a re-delivery fee of $25 may apply (particularly in respect of bulky orders).</p>
-
-            <h5 class="mt-5">Warranty, Return & Refunds Policy</h5>
-            <p>We understand that sometimes you may wish to return a product you have purchased. So we have set out <a href="#">here</a> our Warranty, Return and Refund Policy for our products.</p>
-
-            <h5 class="mt-5">Contact Us</h5>
-            <p>If you have any queries or your order is more than 10 days late please email us at <a href="#">angus.miller28@gmail.com</a></p>
-        </div>
+        }
     </div>
-    <!-- end of product details tab region -->
-    <!-- reviews region -->
-    <div class="reviews-container mt-5 mb-5">
-        <h4>Reviews</h4>
-        <hr />
-        @foreach (var review in Model.ProductReviewsCollection)
-        {
+    <div id="delivery" class="details-delivery-and-returns-info-container tab-pane fade" role="tabpanel" aria-labelledby="delivery-tab">
+        <h5 class="mt-5">Home Delivery</h5>
+        <p>For most items we charge a flat delivery fee per order as listed below:</p>
+        <table>
+            <thead style="background-color: blue; color: white">
+                <tr>
+                    <th colspan="5" width="200px" class="p-3">Location</th>
+                    <th class="p-3">Cost Per Order*</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5" class="p-3">Metro Areas</td>
+                    <td class="p-3">$9.90</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="p-3">Regional Areas</td>
+                    <td class="p-3">$13.90</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="p-3">Remote Areas</td>
+                    <td class="p-3">$15.90</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="mt-5">For bulky orders or orders containing large or fragile items we charge a delivery fee based on the delivery destination and your items. The cost of delivery will be displayed in your shopping cart once a delivery address has been entered.</p>
+
+        <h5 class="mt-5">Delivery Time Frames*</h5>
+        <p>The below standard delivery time frames apply to all online orders:</p>
+        <table>
+            <thead style="background-color: blue; color: white">
+                <tr>
+                    <th colspan="5" width="200px" class="p-3">Location</th>
+                    <th class="p-3">Delivery Time Frames*</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5" class="p-3">Metro Areas</td>
+                    <td class="p-3">4 - 6 business days</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="p-3">Regional Areas</td>
+                    <td class="p-3">6 - 8 business days</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="p-3">Remote Areas</td>
+                    <td class="p-3">8 - 9 business days</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="mt-5">After your order has been shipped you will receive an email informing you of your parcel’s consignment number and the carrier it is shipping with. Please note that these are estimates only. If your order is more than 10 days late please email us at <a href="#">angus.miller28@gmail.com</a>.</p>
+
+        <h5 class="mt-5">*Pre-orders</h5>
+        <p>Pre-ordered items are delivered in accordance with the advertised delivery time frames.</p>
+
+        <h5 class="mt-5">Authority to leave</h5>
+        <p>At the checkout you may grant the carrier authority to leave some goods at the delivery address even if unattended. However, please note that neither BIG W nor the carrier will be liable for loss or theft of the goods and the goods will be left at your risk. In addition, the carrier retains the discretion not to leave the goods unattended, including where the carrier deems it to be unsafe to do so.</p>
+
+        <h5 class="mt-5">Re-delivery Fees</h5>
+        <p>Please note that should the order be unable to be delivered to or left at the delivery address, a re-delivery fee of $25 may apply (particularly in respect of bulky orders).</p>
+
+        <h5 class="mt-5">Warranty, Return & Refunds Policy</h5>
+        <p>We understand that sometimes you may wish to return a product you have purchased. So we have set out <a href="#">here</a> our Warranty, Return and Refund Policy for our products.</p>
+
+        <h5 class="mt-5">Contact Us</h5>
+        <p>If you have any queries or your order is more than 10 days late please email us at <a href="#">angus.miller28@gmail.com</a></p>
+    </div>
+</div>
+<!-- end of product details tab region -->
+<!-- reviews region -->
+<div class="reviews-container mt-5 mb-5">
+    <h4>Reviews</h4>
+    <hr />
+    @foreach (var review in Model.ProductReviewsCollection)
+    {
         <div class="row mt-5 mb-5">
             <div class="col-sm-12 col-md-4">
-                <img src="~/Uploads/Users/Avatar/@review.Avatar" alt="Alternate Text" style="width: 80px; height: 80px"/>
+                <img src="~/Uploads/Users/Avatar/@review.Avatar" alt="Alternate Text" style="width: 80px; height: 80px" />
             </div>
             <div class="col-sm-12 col-md-8 mt-sm-2">
                 <h6>@review.UserName</h6>
@@ -401,43 +397,107 @@
                     }
                     else if (review.Rating == 2)
                     {
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
                     }
                     else if (review.Rating == 3)
                     {
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
                     }
                     else if (review.Rating == 4)
                     {
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
                     }
                     else
                     {
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
-                            <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                        <label class="fa fa-star fa-lg" for="star-rating-5"></label>
                     }
                 </div>
                 <p>Post Date: @review.PostDate</p>
                 <p>@review.Review1</p>
             </div>
         </div>
-            }
-        </div>
+    }
+</div>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIBf_dlxPuiUcIltqhzpt-NUHvHUZs8Ig&libraries=places"></script>
+
+
+<script type="text/javascript">
+            google.maps.event.addDomListener(window, 'load', function () {
+                var input = document.getElementById('ShippingPostcode');
+                var options = {
+                    types: ['address'],
+                    componentRestrictions: { country: 'au' }
+                };
+                autocomplete = new google.maps.places.Autocomplete(input, options);
+                google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                    var place = autocomplete.getPlace();
+                    console.log(place.address_components);
+
+                    if (place.address_components.length == 7) {
+                        var city = place.address_components[2].long_name;
+                        var postcode = place.address_components[6].long_name;
+                        var state = place.address_components[4].short_name;
+                    } else {
+                        var city = place.address_components[0].long_name;
+                        var postcode = place.address_components[4].long_name;
+                        var state = place.address_components[2].short_name;
+                    }
+                    
+
+                    // update location estimate 
+                    $("#delivery-estimate-location").text("");
+                    $("#delivery-estimate-location").append("Showing Delivery estimate for " + city + " " + postcode + ", " + state);
+
+                    $("#stock-location").text("");
+                    $("#stock-location").append(city);
+
+
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: '/Store/CalculateShipping?shippingPostcode=' + postcode,
+                        data: {},
+                        success: function (response) {
+                            $.each(response, function (key, value) {
+                                console.log(value);
+                                $("#shipping-cost").text("");
+                                $("#shipping-cost").append(" $" + value.total_cost);
+
+                                $("#shipping-estimate-time").text("");
+                                $("#shipping-estimate-time").append(" " + value.delivery_time);
+                            });
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrow) {
+                            alert(errorThrow);
+                        }
+                    });
+
+                    console.log(place.address_components[0].long_name);
+                });
+            });
+
+</script>
+
+
+
 
 
 

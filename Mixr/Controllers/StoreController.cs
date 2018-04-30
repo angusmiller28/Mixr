@@ -2,9 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace Mixr.Controllers
 {
@@ -239,6 +242,54 @@ namespace Mixr.Controllers
         public ActionResult AddDiscountCode()
         {
             return RedirectToAction("Cart");
+        }
+
+        // POST: Store/Checkout
+        public JsonResult CalculateShipping(string shippingPostcode)
+        {
+            // Set your API key: remember to change this to your live API key in production
+            string apiKey = "23019725-2d64-4a72-8274-b9b0fce5dd0e";
+
+            // Define the service input parameters
+            string fromPostcode = "2000";
+            string toPostcode = shippingPostcode;
+            int parcelLengthInCMs = 22;
+            int parcelWidthInCMs = 16;
+            double parcelHeighthInCMs = 7.7;
+            double parcelWeightInKGs = 1.5;
+
+
+            // Set the URL for the Domestic Parcel Calculation service
+            string urlPrefix = "digitalapi.auspost.com.au";
+            string calculateRateURL = "https://" + urlPrefix + "/postage/parcel/domestic/calculate.json?"
+                + "from_postcode=" + fromPostcode
+                + "&to_postcode=" + toPostcode
+                + "&length=" + parcelLengthInCMs
+                + "&width=" + parcelWidthInCMs
+                + "&height=" + parcelHeighthInCMs
+                + "&weight=" + parcelWeightInKGs
+                + "&service_code=" + "AUS_PARCEL_REGULAR";
+
+
+            Uri objURI = new Uri(calculateRateURL);
+            HttpWebRequest objwebreq = (HttpWebRequest)WebRequest.Create(objURI);
+            
+            objwebreq.Method = "Get";
+            objwebreq.Timeout = 15000;
+
+
+            objwebreq.Headers.Set("AUTH-KEY", apiKey);//For Localhost
+
+
+            HttpWebResponse objWebResponse = (HttpWebResponse)objwebreq.GetResponse();
+            Stream objStream = objWebResponse.GetResponseStream();
+            StreamReader objStreamReader = new StreamReader(objStream);
+
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            var jsonObject = serializer.DeserializeObject(objStreamReader.ReadToEnd());
+
+            return Json(jsonObject, JsonRequestBehavior.AllowGet);
+
         }
 
         public static List<SelectListItem> GetDropDownListForYears()

@@ -17,8 +17,33 @@ namespace Mixr.Models
             this.Image = image;
             this.Quantity = quantity;
         }
+        public int GetRatingCount(int id)
+        {
+            Entities db = new Entities();
 
-        
+            int ratingCount = db.Reviews
+                                .Where(r => r.Product_Id == id)
+                                .Count();
+
+            return ratingCount;
+        }
+
+        public double GetRatingAverage(int id)
+        {
+            Entities db = new Entities();
+
+            double ratingAverage = 0;
+
+            if (GetRatingCount(id) != 0)
+            {
+                ratingAverage = db.Reviews
+                .Where(r => r.Product_Id == id)
+                .Average(r => r.Rating);
+            }
+
+            return Math.Round(ratingAverage, 2);
+        }
+
     }
 
     public class ProductDTO
@@ -43,6 +68,33 @@ namespace Mixr.Models
 
         public ProductDTO()
         {
+        }
+
+        public int GetRatingCount(int id)
+        {
+            Entities db = new Entities();
+
+            int ratingCount = db.Reviews
+                                .Where(r => r.Product_Id == id)
+                                .Count();
+
+            return ratingCount;
+        }
+
+        public double GetRatingAverage(int id)
+        {
+            Entities db = new Entities();
+
+            double ratingAverage = 0;
+
+            if (GetRatingCount(id) != 0)
+            {
+                ratingAverage = db.Reviews
+                .Where(r => r.Product_Id == id)
+                .Average(r => r.Rating);
+            }
+
+            return Math.Round(ratingAverage, 2);
         }
 
         public IEnumerable<ProductDTO> GetProducts()

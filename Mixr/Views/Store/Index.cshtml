@@ -12,7 +12,67 @@
             <img class="card-img-top" src="Uploads/Products/@product.Image" alt="Card image cap" style="width: 100%">
             <div class="card-body">
                 <h5 class="card-title">@product.Name</h5>
-                <p class="card-text price-text">$@product.Price</p>
+
+                <!-- rating region -->
+                <div class="review-stats-container mt-2 mb-2">
+                    <div class="star-rating__wrap">
+ 
+
+
+                        @if (@product.GetRatingAverage(@product.Id) <= 0)
+    {
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+}
+else if (@product.GetRatingAverage(@product.Id) < 2)
+{
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+}
+else if (@product.GetRatingAverage(@product.Id) < 3)
+{
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+}
+else if (@product.GetRatingAverage(@product.Id) < 4)
+{
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+}
+else if (@product.GetRatingAverage(@product.Id) < 5)
+{
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star-o fa-lg" for="star-rating-5"></label>
+}
+else
+{
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+                    <label class="fa fa-star fa-lg" for="star-rating-5"></label>
+}
+
+                    </div>
+
+                    <p>@product.GetRatingAverage(@product.Id) (@product.GetRatingCount(@product.Id) Reviews)</p>
+                </div>
+                <h4 class="card-text price-text mb-4 mt-4">$@product.Price</h4>
                 <a href="/Store/Product/@product.Id" class="btn btn-primary">View</a>
             </div>
         </div>
