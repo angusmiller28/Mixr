@@ -591,6 +591,9 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>MixrDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Discount.cs">
+      <DependentUpon>MixrDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -619,6 +622,9 @@
       <DependentUpon>MixrDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ProductQuantity.cs">
+      <DependentUpon>MixrDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProductsGallery.cs">
       <DependentUpon>MixrDatabase.tt</DependentUpon>
     </Compile>
@@ -629,6 +635,9 @@
       <DependentUpon>MixrDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReviewModel.cs" />
+    <Compile Include="Models\Store.cs">
+      <DependentUpon>MixrDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StoreViewModel.cs" />
     <Compile Include="Models\StudentInfo.cs">
       <DependentUpon>MixrDatabase.tt</DependentUpon>

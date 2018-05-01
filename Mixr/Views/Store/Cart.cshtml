@@ -25,7 +25,7 @@
                     @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "col-md-2 text-danger" })
                     <div class="form-group">
                         <div class="btn-group">
-                            @Html.TextBoxFor(m => m.Quantity, @product.Quantity.ToString(), new { @class = "form-control mr-2 text-center", @type = "number", @min = "1", @value = "1" })
+                            @Html.TextBoxFor(m => m.Quantity, @product.Quantity.ToString(), new { @class = "form-control mr-2 text-center", @type = "number", @min = "1", @value = "1", style="width:100px" })
                             <input type="submit" value="Update" class="btn btn-default" />
                         </div>
                     </div>
@@ -60,7 +60,7 @@
 
         <!-- update product quantity -->
         @using (Html.BeginForm("AddDiscountCode", "Store", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
-    {
+        {
         @Html.AntiForgeryToken()
 
         @Html.LabelFor(m => m.DiscountCode, new { @class = "control-label" })
@@ -71,7 +71,14 @@
                 <input type="submit" value="Discount" class="btn btn-default" />
             </div>
         </div>
-}
+        
+        }
+
+        @if (Model.Discount != null)
+        {
+            <p>Discount applied: @Model.Discount.Code</p>
+        }
+
         <!-- end of update product quantity -->
 
         <!-- go to checkout -->

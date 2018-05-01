@@ -1,4 +1,5 @@
 ﻿using Mixr.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +14,8 @@ namespace Mixr.Controllers
 {
     public class StoreController : Controller
     {
+        Entities db = new Entities();
+
         StoreViewModel store = new StoreViewModel();
 
         Cart cart = new Cart();
@@ -162,6 +165,7 @@ namespace Mixr.Controllers
             Cart cart = Session["cart"] as Cart;
 
             ViewBag.NotificationSuccess = TempData["notificationSuccess"];
+            ViewBag.NotificationDanger = TempData["notificationDanger"];
 
             return View(cart);
         }
@@ -239,13 +243,61 @@ namespace Mixr.Controllers
         // POST: Store/Checkout
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddDiscountCode()
+        public ActionResult AddDiscountCode(Cart model)
         {
+            // validate discount code
+
+            var discountValid = db.Discounts.Any(x => x.Code == model.DiscountCode);
+
+            if (discountValid)
+            {
+                // get discount 
+                Discount discount = db.Discounts.Where(x => x.Code == model.DiscountCode).First();
+
+                Cart cart = Session["cart"] as Cart;
+                cart.UpdateTotalPriceWithDiscount(discount);
+                Session["cart"] = cart;
+
+                TempData["notificationSuccess"] = "Discount applied to your cart";
+            }
+            else
+            {
+                TempData["NotificationDanger"] = "Discount code invalid";
+            }
+            
             return RedirectToAction("Cart");
         }
 
         // POST: Store/Checkout
-        public JsonResult CalculateShipping(string shippingPostcode)
+        public JsonResult CheckStock(string location, int id)
+        {
+            
+            var product = db.Products.Where(x => x.Id == id);
+         
+            Product prod = null;
+
+            foreach (Product p in product)
+            {
+                prod = new Product(
+                p.Id,
+                p.Name,
+                p.Price,
+                p.Image,
+                p.GetProductQuantity(location)
+                );
+            }
+
+            List<Product> eList = new List<Product>();
+            eList.Add(prod);
+
+            string ans = JsonConvert.SerializeObject(eList, Formatting.Indented);
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            var jsonObject = serializer.DeserializeObject(ans);
+
+            return Json(jsonObject, JsonRequestBehavior.AllowGet);
+        }
+            // POST: Store/Checkout
+            public JsonResult CalculateShipping(string shippingPostcode)
         {
             // Set your API key: remember to change this to your live API key in production
             string apiKey = "23019725-2d64-4a72-8274-b9b0fce5dd0e";

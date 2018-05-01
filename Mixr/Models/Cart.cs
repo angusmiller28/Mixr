@@ -12,6 +12,7 @@
         {
             public decimal TotalPrice { get; set; }
             public int Quantity { get; set; }
+            public Discount Discount { get; set; }
 
             [Display(Name = "Discount code")]
             public string DiscountCode { get; set; }
@@ -22,11 +23,13 @@
         public void AddProductToCart(ProductDTO product)
             {
                 CartCollection.Add(product);
+                UpdateTotalPrice();
             }
 
             public void RemoveProductFromCart(int id)
             {
                 CartCollection.RemoveAll(r => r.Id == id);
+                UpdateTotalPrice();
 
             }
 
@@ -34,6 +37,17 @@
             {
                 var obj = CartCollection.FirstOrDefault(x => x.Id == id);
                 if (obj != null) obj.Quantity = quantity;
+
+                if (Discount == null)
+                {
+                    UpdateTotalPrice();
+                }   
+                else
+                {
+                    UpdateTotalPrice();
+                    UpdateTotalPriceWithDiscount(Convert.ToDecimal(Discount.Discount1) * TotalPrice);
+                }
+                    
             }
 
             public IEnumerable<Product> GetAllProduct()
@@ -67,7 +81,7 @@
             {
                 Entities dbContext = new Entities();
 
-                decimal result = CartCollection.Sum(x => x.Price * x.Quantity);
+                decimal result = TotalPrice;
                 return result;
             }
 
@@ -75,9 +89,35 @@
             {
                 Entities dbContext = new Entities();
 
-                TotalPrice = CartCollection.Sum(x => x.Price * x.Quantity);
+            // check if discount is already applied
+            if (Discount == null)
+            {
+                TotalPrice = Math.Round(CartCollection.Sum(x => x.Price * x.Quantity), 2);
+            }
+            else
+            {
+                UpdateTotalPriceWithDiscount(Convert.ToDecimal(Discount.Discount1) * TotalPrice);
+            }
 
-        }
+            }
+
+            public void UpdateTotalPriceWithDiscount(Discount discount)
+            {
+                Entities dbContext = new Entities();
+
+                
+                TotalPrice = Math.Round(CartCollection.Sum(x => x.Price * x.Quantity) - (Convert.ToDecimal(discount.Discount1) * CartCollection.Sum(x => x.Price * x.Quantity)), 2);
+                Discount = discount;
+            }
+
+            public void UpdateTotalPriceWithDiscount(decimal price)
+            {
+                Entities dbContext = new Entities();
+
+                TotalPrice = Math.Round(CartCollection.Sum(x => x.Price * x.Quantity) - (Convert.ToDecimal(Discount.Discount1) * CartCollection.Sum(x => x.Price * x.Quantity)), 2);
+            }
+
+
 
     }
 

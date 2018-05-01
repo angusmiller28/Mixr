@@ -67,6 +67,14 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Avatar" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discount" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductFeatures">
           <Key>
             <PropertyRef Name="Id" />
@@ -86,6 +94,15 @@
           <Property Name="Product_Id" Type="int" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="ProductQuantity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Store_Id" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
@@ -95,6 +112,7 @@
           <Property Name="Price" Type="decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductsGallery">
           <Key>
@@ -125,6 +143,13 @@
           <Property Name="User_Id" Type="nvarchar" MaxLength="128" />
           <Property Name="Customer_Name" Type="nchar" MaxLength="10" />
           <Property Name="Post_Date" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stores">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Product_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="StudentInfo">
           <Key>
@@ -222,6 +247,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductQuantity_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductQuantity" Type="Self.ProductQuantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductQuantity">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductQuantity_ToStores">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1" />
+          <End Role="ProductQuantity" Type="Self.ProductQuantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="ProductQuantity">
+              <PropertyRef Name="Store_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductsGallery_ToProducts">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="ProductsGallery" Type="Self.ProductsGallery" Multiplicity="*" />
@@ -270,6 +319,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Stores_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Stores" Type="Self.Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -277,12 +338,15 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductFeatures" EntityType="Self.ProductFeatures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductGallery" EntityType="Self.ProductGallery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductQuantity" EntityType="Self.ProductQuantity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductsGallery" EntityType="Self.ProductsGallery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductSpecifications" EntityType="Self.ProductSpecifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentInfo" EntityType="Self.StudentInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -309,6 +373,14 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductGallery" EntitySet="ProductGallery" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductQuantity_ToProducts" Association="Self.FK_ProductQuantity_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductQuantity" EntitySet="ProductQuantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductQuantity_ToStores" Association="Self.FK_ProductQuantity_ToStores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="ProductQuantity" EntitySet="ProductQuantity" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductsGallery_ToProducts" Association="Self.FK_ProductsGallery_ToProducts">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductsGallery" EntitySet="ProductsGallery" />
@@ -324,6 +396,10 @@
           <AssociationSet Name="FK_Review_ToUsers" Association="Self.FK_Review_ToUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stores_ToProducts" Association="Self.FK_Stores_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Stores" EntitySet="Stores" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -392,6 +468,14 @@
           <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_ToUsers" FromRole="AspNetUsers" ToRole="Review" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discount1" Type="Double" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductFeature">
           <Key>
             <PropertyRef Name="Id" />
@@ -413,6 +497,17 @@
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductGallery_ToProduct" FromRole="ProductGallery" ToRole="Products" />
         </EntityType>
+        <EntityType Name="ProductQuantity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Store_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductQuantity_ToProducts" FromRole="ProductQuantity" ToRole="Products" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_ProductQuantity_ToStores" FromRole="ProductQuantity" ToRole="Stores" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -422,11 +517,14 @@
           <Property Name="Price" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProductFeatures" Relationship="Self.FK_ProductFeatures_ToProduct" FromRole="Products" ToRole="ProductFeatures" />
           <NavigationProperty Name="ProductGalleries" Relationship="Self.FK_ProductGallery_ToProduct" FromRole="Products" ToRole="ProductGallery" />
+          <NavigationProperty Name="ProductQuantities" Relationship="Self.FK_ProductQuantity_ToProducts" FromRole="Products" ToRole="ProductQuantity" />
           <NavigationProperty Name="ProductsGalleries" Relationship="Self.FK_ProductsGallery_ToProducts" FromRole="Products" ToRole="ProductsGallery" />
           <NavigationProperty Name="ProductSpecifications" Relationship="Self.FK_ProductSpecifications_ToProduct" FromRole="Products" ToRole="ProductSpecifications" />
           <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_ToProducts" FromRole="Products" ToRole="Review" />
+          <NavigationProperty Name="Stores" Relationship="Self.FK_Stores_ToProducts" FromRole="Products" ToRole="Stores" />
         </EntityType>
         <EntityType Name="ProductsGallery">
           <Key>
@@ -461,6 +559,15 @@
           <Property Name="Post_Date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Review_ToUsers" FromRole="Review" ToRole="AspNetUsers" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Review_ToProducts" FromRole="Review" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProductQuantities" Relationship="Self.FK_ProductQuantity_ToStores" FromRole="Stores" ToRole="ProductQuantity" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Stores_ToProducts" FromRole="Stores" ToRole="Products" />
         </EntityType>
         <EntityType Name="StudentInfo">
           <Key>
@@ -542,6 +649,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductQuantity_ToProducts">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductQuantity" Type="Self.ProductQuantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductQuantity">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductQuantity_ToStores">
+          <End Role="Stores" Type="Self.Store" Multiplicity="1" />
+          <End Role="ProductQuantity" Type="Self.ProductQuantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="ProductQuantity">
+              <PropertyRef Name="Store_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductsGallery_ToProducts">
           <End Role="Products" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductsGallery" Type="Self.ProductsGallery" Multiplicity="*" />
@@ -578,6 +709,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Stores_ToProducts">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="Stores" Type="Self.Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -588,12 +731,15 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Discounts" EntityType="Self.Discount" />
           <EntitySet Name="ProductFeatures" EntityType="Self.ProductFeature" />
           <EntitySet Name="ProductGalleries" EntityType="Self.ProductGallery" />
+          <EntitySet Name="ProductQuantities" EntityType="Self.ProductQuantity" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductsGalleries" EntityType="Self.ProductsGallery" />
           <EntitySet Name="ProductSpecifications" EntityType="Self.ProductSpecification" />
           <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="Stores" EntityType="Self.Store" />
           <EntitySet Name="StudentInfoes" EntityType="Self.StudentInfo" />
           <EntitySet Name="Tables" EntityType="Self.Table" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -616,6 +762,14 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductGallery" EntitySet="ProductGalleries" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductQuantity_ToProducts" Association="Self.FK_ProductQuantity_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductQuantity" EntitySet="ProductQuantities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductQuantity_ToStores" Association="Self.FK_ProductQuantity_ToStores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="ProductQuantity" EntitySet="ProductQuantities" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductsGallery_ToProducts" Association="Self.FK_ProductsGallery_ToProducts">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductsGallery" EntitySet="ProductsGalleries" />
@@ -627,6 +781,10 @@
           <AssociationSet Name="FK_Review_ToProducts" Association="Self.FK_Review_ToProducts">
             <End Role="Products" EntitySet="Products" />
             <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stores_ToProducts" Association="Self.FK_Stores_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Stores" EntitySet="Stores" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -695,6 +853,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="Model.Discount">
+              <MappingFragment StoreEntitySet="Discounts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Discount1" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductFeatures">
             <EntityTypeMapping TypeName="Model.ProductFeature">
               <MappingFragment StoreEntitySet="ProductFeatures">
@@ -716,6 +883,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductQuantities">
+            <EntityTypeMapping TypeName="Model.ProductQuantity">
+              <MappingFragment StoreEntitySet="ProductQuantity">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="Model.Product">
               <MappingFragment StoreEntitySet="Products">
@@ -724,6 +901,7 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -757,6 +935,14 @@
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
                 <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
                 <ScalarProperty Name="Post_Date" ColumnName="Post_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="Model.Store">
+              <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

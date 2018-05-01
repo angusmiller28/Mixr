@@ -7,7 +7,7 @@ namespace Mixr.Models
 {
     public partial class Product
     {
-        public int Quantity { get; set; }
+        
 
         public Product(int id, string name, decimal price, string image, int quantity)
         {
@@ -44,6 +44,24 @@ namespace Mixr.Models
             return Math.Round(ratingAverage, 2);
         }
 
+        public int GetProductQuantity(string store)
+        {
+            Entities dbContext = new Entities();
+            // select all review from the customers on a product page who are registered
+            var result = (from s in dbContext.Stores
+                         from p in dbContext.Products
+                         from q in dbContext.ProductQuantities
+                         where q.Store_Id == store && q.Product_Id == Id
+                         select q.Quantity).ToList();
+
+            int qty = 0;
+            foreach (var r in result)
+            {
+                qty = r;
+            }
+
+            return qty;
+        }
     }
 
     public class ProductDTO
@@ -143,5 +161,7 @@ namespace Mixr.Models
 
                     }).ToList();
         }
+
+        
     }
 }
