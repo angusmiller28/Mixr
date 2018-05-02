@@ -4,9 +4,8 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse d-flex flex-column flex-lg-row" id="navbarSupportedContent">
-        <ul class="navbar-nav" >
-
+    <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+        <ul class="navbar-nav " >
             <li class="nav-item">
                 @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link text-center" })
             </li>
@@ -32,29 +31,14 @@
                 @Html.Partial("_FinanceNavPartial")
             }
             @Html.Partial("_LoginPartial")
-
-
-
         </ul>
-        <form class="form-inline my-2 my-lg-0 d-flex justify-content-sm-center flex-sm-row mr-5 mt-5 mt-lg-0">
-            <div class="form-group">
-                
-                
-                <input id="Search" class="form-control mr-2 text-center" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success my-2 my-sm-0 text-center" type="submit"><i class="fa fa-search"></i></button>
-            </div>
-        </form>
     </div>
 </nav>
 
-<div class="search-results-container">
-
-</div>
 
 
-@{
-    Html.RenderAction("Index", "Search");
-}
+
+
 
 
 

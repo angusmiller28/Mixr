@@ -11,7 +11,11 @@
     color: white;
 }
 
+    .navbar-primary a.dropdown-item, .navbar-primary a.dropdown-item:hover {
+        color: #3B5998;
+    }
 
+    
 .navbar-primary a:hover {
     color: white;
     text-decoration-line: underline;

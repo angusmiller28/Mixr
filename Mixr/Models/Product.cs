@@ -11,7 +11,8 @@ namespace Mixr.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,13 +27,20 @@ namespace Mixr.Models
             this.Stores = new HashSet<Store>();
         }
     
+        
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public decimal Price { get; set; }
+        [Required]
         public string Description { get; set; }
         public string Image { get; set; }
         public int Quantity { get; set; }
+        [Required]
+        public string Category_Id { get; set; }
     
+        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductFeature> ProductFeatures { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

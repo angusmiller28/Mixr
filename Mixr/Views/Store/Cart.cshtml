@@ -5,54 +5,56 @@
 
 <h1>Cart</h1>
 <hr />
-<div class="row">
-    <div class="col-6">
-        @if (Model != null)
+<div class="row ">
+    <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-around" >
+        <div style="width: 300px">
+            @if (Model != null)
+    {
+
+        foreach (var product in Model.CartCollection)
         {
+            <img class="card-img-top mt-5" src="~/Uploads/Products/@product.Image" alt="Card image cap" style="width: 300px; height: 200px">
+            <h5 style="width: 300px">@product.Name</h5>
+            <p style="width: 300px">$@product.Price</p>
 
-            foreach (var product in Model.CartCollection)
-            {
-                <img class="card-img-top mt-5" src="~/Uploads/Products/@product.Image" alt="Card image cap" style="width: 300px; height: 200px">
-                <h5>@product.Name</h5>
-                <p>$@product.Price</p>
+            <!-- update product quantity -->
+    using (Html.BeginForm("CartProductUpdateQuantity", "Store", new { ReturnUrl = ViewBag.ReturnUrl, id = product.Id }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form", style = "width:300px" }))
+    {
+        @Html.AntiForgeryToken()
 
-                <!-- update product quantity -->
-                using (Html.BeginForm("CartProductUpdateQuantity", "Store", new { ReturnUrl = ViewBag.ReturnUrl, id = product.Id }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-
-                    @Html.LabelFor(m => m.Quantity, new { @class = "control-label" })
-                    @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "col-md-2 text-danger" })
-                    <div class="form-group">
-                        <div class="btn-group">
-                            @Html.TextBoxFor(m => m.Quantity, @product.Quantity.ToString(), new { @class = "form-control mr-2 text-center", @type = "number", @min = "1", @value = "1", style="width:100px" })
-                            <input type="submit" value="Update" class="btn btn-default" />
-                        </div>
-                    </div>
-                }
-                <!-- end of update product quantity -->
-                <!-- remove product -->
-                using (Html.BeginForm("CartProductRemove", "Store", new { ReturnUrl = ViewBag.ReturnUrl, id = product.Id }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
+        @Html.LabelFor(m => m.Quantity, new { @class = "control-label" })
+        @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "col-md-2 text-danger" })
+        <div class="form-group">
+            <div class="btn-group">
+                @Html.TextBoxFor(m => m.Quantity, @product.Quantity.ToString(), new { @class = "form-control mr-2 text-center", @type = "number", @min = "1", @value = "1", style = "width:100px" })
+                <input type="submit" value="Update" class="btn btn-default" />
+            </div>
+        </div>
+}
+        <!-- end of update product quantity -->
+        <!-- remove product -->
+using (Html.BeginForm("CartProductRemove", "Store", new { ReturnUrl = ViewBag.ReturnUrl, id = product.Id }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form", style = "width:300px" }))
+{
+        @Html.AntiForgeryToken()
 
 
-                    <div class="form-group">
-                        <div class="ml-5">
-                            <input type="submit" value="Remove from Cart" class="btn btn-danger" />
-                        </div>
-                    </div>
-                }
-                <!-- end of remove product -->
-            }
-        }
-        else
-        {
-            <p>Your cart is empty.</p>
-        }
+        <div class="form-group">
+            <div class="ml-5">
+                <input type="submit" value="Remove from Cart" class="btn btn-danger" />
+            </div>
+        </div>
+}
+        <!-- end of remove product -->
+}
+}
+else
+{
+        <p>Your cart is empty.</p>
+}
+        </div>
     </div>
 
-    <div class="col-6 mt-5">
+    <div class="col-md-6 col-sm-12 mt-5">
         @if (Model != null)
         {
         <p><strong>Total Price: </strong>$@Model.GetTotalPrice()</p>
@@ -74,7 +76,7 @@
         
         }
 
-        @if (Model.Discount != null)
+        @if (Model != null && Model.Discount != null)
         {
             <p>Discount applied: @Model.Discount.Code</p>
         }

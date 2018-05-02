@@ -7,15 +7,16 @@ namespace Mixr.Models
 {
     public partial class Product
     {
-        
+        public HttpPostedFileBase ProductImage { get; set; }
 
-        public Product(int id, string name, decimal price, string image, int quantity)
+        public Product(int id, string name, decimal price, string image, int quantity, string category)
         {
             this.Id = id;
             this.Name = name;
             this.Price = price;
             this.Image = image;
             this.Quantity = quantity;
+            this.Category_Id = category;
         }
         public int GetRatingCount(int id)
         {

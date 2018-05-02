@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>Manage Product Categories</h2>
+@Html.ActionLink("Create New Category", "Create") | @Html.ActionLink("Manage Category", "Manage")
+<hr />
+
+<h2>Add Category to Product</h2>
+
+@using (Html.BeginForm("CategoryAddToProduct", "Role"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Product : @Html.TextBox("Product", null, new { @class = "form-control mb-2" })
+        Category Name: @Html.DropDownList("CategoryName", (IEnumerable<SelectListItem>)ViewBag.Categories, "Select ...", new { @class = "form-control" })
+    </p>
+
+    <input type="submit" value="Add" class="btn btn-primary" />
+}
+<hr />
+<h3>Get Categories for a product</h3>
+@using (Html.BeginForm("GetCategories", "Category"))
+{
+    @Html.AntiForgeryToken()
+    <p>
+        Product : @Html.TextBox("Product", null, new { @class = "form-control mb-2" })
+        <input type="submit" value="Get Categories" class="btn btn-primary" />
+    </p>
+}
+
+@if (ViewBag.CategoriesForThisProduct != null)
+{
+    <div style="background-color:yellow;">
+        <h3>Categories for this product </h3>
+        <ol>
+            @foreach (string s in ViewBag.CategoriesForThisProduct)
+            {
+                <li>@s</li>
+            }
+        </ol>
+    </div>
+}
+
+<hr />
+<h3>Delete A Product from a Category</h3>
+
+@using (Html.BeginForm("DeleteCategoryForProduct", "Category"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Product : @Html.TextBox("Product", null, new { @class = "form-control mb-2" })
+        Category Name: @Html.DropDownList("CategoryName", (IEnumerable<SelectListItem>)ViewBag.Categories, "Select ...", new { @class = "form-control" })
+    </p>
+
+    <input type="submit" value="Delete" class="btn btn-danger" />
+}
+

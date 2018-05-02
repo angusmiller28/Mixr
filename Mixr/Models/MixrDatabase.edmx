@@ -67,6 +67,12 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Avatar" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Discounts">
           <Key>
             <PropertyRef Name="Id" />
@@ -113,6 +119,7 @@
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Category_Id" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductsGallery">
           <Key>
@@ -271,6 +278,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Products_ToCategories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductsGallery_ToProducts">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="ProductsGallery" Type="Self.ProductsGallery" Multiplicity="*" />
@@ -338,6 +357,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductFeatures" EntityType="Self.ProductFeatures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductGallery" EntityType="Self.ProductGallery" Schema="dbo" store:Type="Tables" />
@@ -380,6 +400,10 @@
           <AssociationSet Name="FK_ProductQuantity_ToStores" Association="Self.FK_ProductQuantity_ToStores">
             <End Role="Stores" EntitySet="Stores" />
             <End Role="ProductQuantity" EntitySet="ProductQuantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ToCategories" Association="Self.FK_Products_ToCategories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductsGallery_ToProducts" Association="Self.FK_ProductsGallery_ToProducts">
             <End Role="Products" EntitySet="Products" />
@@ -468,6 +492,13 @@
           <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_ToUsers" FromRole="AspNetUsers" ToRole="Review" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_ToCategories" FromRole="Categories" ToRole="Products" />
+        </EntityType>
         <EntityType Name="Discount">
           <Key>
             <PropertyRef Name="Id" />
@@ -518,6 +549,8 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Category_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Products_ToCategories" FromRole="Products" ToRole="Categories" />
           <NavigationProperty Name="ProductFeatures" Relationship="Self.FK_ProductFeatures_ToProduct" FromRole="Products" ToRole="ProductFeatures" />
           <NavigationProperty Name="ProductGalleries" Relationship="Self.FK_ProductGallery_ToProduct" FromRole="Products" ToRole="ProductGallery" />
           <NavigationProperty Name="ProductQuantities" Relationship="Self.FK_ProductQuantity_ToProducts" FromRole="Products" ToRole="ProductQuantity" />
@@ -622,6 +655,18 @@
             </Principal>
             <Dependent Role="Review">
               <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ToCategories">
+          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -731,6 +776,7 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Discounts" EntityType="Self.Discount" />
           <EntitySet Name="ProductFeatures" EntityType="Self.ProductFeature" />
           <EntitySet Name="ProductGalleries" EntityType="Self.ProductGallery" />
@@ -753,6 +799,10 @@
           <AssociationSet Name="FK_Review_ToUsers" Association="Self.FK_Review_ToUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ToCategories" Association="Self.FK_Products_ToCategories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductFeatures_ToProduct" Association="Self.FK_ProductFeatures_ToProduct">
             <End Role="Products" EntitySet="Products" />
@@ -853,6 +903,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="Model.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Discounts">
             <EntityTypeMapping TypeName="Model.Discount">
               <MappingFragment StoreEntitySet="Discounts">
@@ -902,6 +959,7 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

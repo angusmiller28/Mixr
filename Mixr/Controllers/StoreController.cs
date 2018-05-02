@@ -28,6 +28,20 @@ namespace Mixr.Controllers
             return View(Model);
         }
 
+        // GET: Store/Products
+        public ActionResult Products(string categoryName)
+        {
+            if (categoryName == null)
+                return RedirectToAction("Index");
+
+            var Model = store.GetAllProduct().Where(x => x.Category_Id == categoryName);
+
+            if (Model.Count() == 0)
+                return RedirectToAction("Index");
+
+            return View(Model);
+        }
+
         // GET: Store/Product/{id}
         public ActionResult Product(int id)
         {
@@ -283,7 +297,8 @@ namespace Mixr.Controllers
                 p.Name,
                 p.Price,
                 p.Image,
-                p.GetProductQuantity(location)
+                p.GetProductQuantity(location),
+                p.Category_Id
                 );
             }
 

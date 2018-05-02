@@ -1,13 +1,42 @@
-﻿@model IEnumerable<Mixr.Models.ProductDTO>
+﻿
 
-<div class="row">
-    <div class="col-12 mb-0">
+<nav class="navbar navbar-light bg-light d-flex flex-md-row flex-column justify-content-md-between justify-content-start ">
+
+    <div>
+        <ul class="navbar-nav ">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="width: 120px" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @foreach (var category in @Model.CategoriesCollection)
+    {
+                    <a href="/Store/Products?categoryName=@category.Name" class="dropdown-item text-center">@category.Name</a>
+ 
+}
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <form class="form-inline my-2 my-lg-0 d-flex flex-row mt-lg-0 ">
+            <div class="form-group d-flex flex-row">
+                <input id="Search" class="form-control mr-2 text-center" type="search" placeholder="Search" aria-label="Search">
+                <button class="form-control btn btn-success my-2 my-sm-0 text-center" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+</nav>
+
+
+
+    <div class="col-12 mb-0 pt-2">
         <div id="SearchTable" class="d-flex justify-content-center align-items-center flex-column flex-lg-row">
 
-        </div >
+        </div>
         <div id="search-table-divider" class="dropdown-divider"></div>
     </div>
-</div>
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
 
@@ -38,20 +67,20 @@
                         }
                         else {
                             $.each(result, function (index, value) {
-                                var Data = '<div class="mr-lg-5 ml-lg-5 d-flex mb-sm-5 mb-lg-2 mt-lg-2 justify-content-center align-items-center"><a href="/Store/Product/' + value.Id +'">' +
+                                var Data = '<div class="mr-lg-5 ml-lg-5 d-flex mb-sm-5 mb-lg-2 mt-lg-2 justify-content-center align-items-center"><a href="/Store/Product/' + value.Id + '">' +
                                     '<img width="100%" style="max-width: 200px" class="search-image" src="/Uploads/Products/' + value.Image + '"/>' +
-                                    '<p class="mb-0 mt-2">' + value.Name + "</p>" +
+                                    '<p class="mb-0 mt-2" width="100%" style="max-width: 200px">' + value.Name + "</p>" +
                                     "<p>$" + value.Price + "</p>" +
                                     "</a></div>";
                                 SetData.append(Data);
                             });
-                            
+
                         }
                     }
                 });
             }
-                
-            
+
+
         });
     });
 </script>

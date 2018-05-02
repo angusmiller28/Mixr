@@ -1,0 +1,19 @@
+﻿ 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Category Listing </h2>
+
+@Html.ActionLink("Create New Category", "Create") | @Html.ActionLink("Manage Product Category", "Manage")
+<hr />
+<div>
+    @foreach (var category in Model)
+    {
+        <p>
+            <strong>@category.Name | </strong>
+            <span onclick="return confirm('Are you sure to delete?')"><a href="/Category/Delete?CategoryName=@category.Name" class="delLink" style="color:red;">Delete</a></span> |
+            @Html.ActionLink("Edit", "Edit", new { CategoryName = @category.Name })
+        </p>
+    }
+</div>

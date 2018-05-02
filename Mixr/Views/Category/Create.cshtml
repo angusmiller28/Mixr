@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Category</h2>
+@Html.ActionLink("List Categories", "Index") | @Html.ActionLink("Manage Categories", "ManageCategories")
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+        Category name
+    </div>
+    <p>
+        @Html.TextBox("CategoryName")
+    </p>
+    <input type="submit" value="Save" />
+}
+

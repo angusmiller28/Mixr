@@ -16,8 +16,15 @@ namespace Mixr.Controllers
         public PartialViewResult Index(string searching)
         {
             ProductDTO product = new ProductDTO();
-            IEnumerable<ProductDTO> StuList = product.GetProducts();
-            return PartialView(StuList);
+            Category category = new Category();
+
+            var model = new SearchViewModel()
+            {
+                ProductsCollection = product.GetProducts(),
+                CategoriesCollection = db.Categories.ToList(),
+            };
+
+            return PartialView(model);
         }
 
         public JsonResult GetSearchingData(string SearchBy, string SearchValue)
